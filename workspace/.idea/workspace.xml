@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4e47fc33-1102-4298-9a1f-d81222724e99" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="36Yv0ClXcn9zB9ObbpD944VjmdD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/meetup-demo/workspace",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="LiferayDockerServerConfiguration" factoryName="Liferay Docker Server">
+      <option name="passParentEnvironments" value="true" />
+      <option name="workspaceLocation" value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="LiferayServerConfiguration" factoryName="Liferay Server">
+      <Liferay-Sever alternativeJrePath="" bundleLocation="" bundleType="" developerMode="true" gogoShellPort="11311" vmParameters="-Xmx2560m -XX:MaxMetaspaceSize=768m -XX:MetaspaceSize=768m">
+        <envs>
+          <env name="PATH" value="C:/Program Files/Java/jdk-17/bin:C:\Program Files\Java\jdk-17\bin;C:\WINDOWS;C:\WINDOWS\system32;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\Common Files\Oracle\Java\javapath;;C:\Users\ankit.hadiyal\.jpm\windows\bin;C:\Program Files\cursor\resources\app\bin;C:\Users\ankit.hadiyal\AppData\Local\Microsoft\WindowsApps;C:\Users\ankit.hadiyal\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\ankit.hadiyal\AppData\Roaming\npm;C:\Users\ankit.hadiyal\AppData\Local\GitHubDesktop\bin;C:\Users\ankit.hadiyal\AppData\Local\Programs\Antigravity\bin" />
+          <env name="JAVA_HOME" value="C:/Program Files/Java/jdk-17" />
+        </envs>
+        <module name="workspace" />
+      </Liferay-Sever>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4e47fc33-1102-4298-9a1f-d81222724e99" name="Changes" comment="" />
+      <created>1765196094084</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1765196094084</updated>
+    </task>
+    <servers />
+  </component>
+</project>

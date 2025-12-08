@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<license>
+	<account-name>Customer Portal</account-name>
+	<owner>Customer Portal</owner>
+	<description>Customer Portal</description>
+	<product-name>DXP Development</product-name>
+	<product-version>7.4</product-version>
+	<license-name>DXP Development</license-name>
+	<license-type>developer</license-type>
+	<license-version>6</license-version>
+	<start-date>Thursday, January 23, 2025 12:00:00 AM GMT</start-date>
+	<expiration-date>Friday, January 23, 2026 12:00:00 AM GMT</expiration-date>
+	<max-http-sessions>5</max-http-sessions>
+	<instance-size>Sizing 1</instance-size>
+	<key>ec629e889216796002f5c8463b46b3f13bef7cfed026d3c0cf49e33a5b6c48f1fe2ab22f84edd53a7c012d3557d4865315b3b681e37cb89f216964f8f09efac9c5bffc452c6a068f4100b0d61a30ea92b2d2b2ad4acfd3fed99899f093d05e6f6e3b61bf070e08743ff56fdc706c3cc7b740595040b7d54ab2cd80aa632c2377318d9be5</key>
+</license>

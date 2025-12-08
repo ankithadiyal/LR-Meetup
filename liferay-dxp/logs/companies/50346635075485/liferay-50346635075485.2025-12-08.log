@@ -1,0 +1,63 @@
+2025-12-08 11:01:17.008 WARN  [liferay/mail-2][MailMessageListener:123] Email test@domain.invalid will be ignored because it is included in mail.send.blacklist
+2025-12-08 11:01:17.018 WARN  [liferay/mail-2][MailMessageListener:49] Skipping email because the sender is not specified
+2025-12-08 11:01:17.161 WARN  [liferay/mail-3][MailMessageListener:123] Email test@domain.invalid will be ignored because it is included in mail.send.blacklist
+2025-12-08 11:01:17.161 WARN  [liferay/mail-3][MailMessageListener:49] Skipping email because the sender is not specified
+2025-12-08 11:04:56.516 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:527] Initializing com.liferay.site.initializer.welcome for group 20117
+2025-12-08 11:04:56.559 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateDDMStructures took 1 ms
+2025-12-08 11:04:56.560 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateListTypeDefinitions took 0 ms
+2025-12-08 11:04:56.561 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addStyleBookEntries took 0 ms
+2025-12-08 11:04:56.570 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addSiteSettings took 6 ms
+2025-12-08 11:04:56.591 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateRoles took 19 ms
+2025-12-08 11:04:56.592 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addWorkflowDefinitions took 1 ms
+2025-12-08 11:04:56.595 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateExpandoColumns took 0 ms
+2025-12-08 11:04:56.598 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateObjectFolders took 0 ms
+2025-12-08 11:04:56.600 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateTaxonomyVocabularies took 0 ms
+2025-12-08 11:04:56.602 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateUserGroups took 0 ms
+2025-12-08 11:04:56.603 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addSiteConfiguration took 0 ms
+2025-12-08 11:04:56.605 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateDepotEntries took 0 ms
+2025-12-08 11:05:11.861 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateDocuments took 15255 ms
+2025-12-08 11:05:11.862 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addAccounts took 0 ms
+2025-12-08 11:05:11.864 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateSAPEntries took 0 ms
+2025-12-08 11:05:11.897 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addAccountGroups took 33 ms
+2025-12-08 11:05:11.898 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addAccountGroupAssignments took 0 ms
+2025-12-08 11:05:11.899 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateKnowledgeBaseArticles took 1 ms
+2025-12-08 11:05:11.932 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateDataDefinitions took 32 ms
+2025-12-08 11:05:14.300 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateLayouts took 2367 ms
+2025-12-08 11:05:14.301 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking setPLOEntries took 0 ms
+2025-12-08 11:05:14.302 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateOrganizations took 0 ms
+2025-12-08 11:05:14.303 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addFragmentEntries took 0 ms
+2025-12-08 11:05:14.309 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateClientExtensionEntries took 5 ms
+2025-12-08 11:05:14.310 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addKeywords took 0 ms
+2025-12-08 11:05:14.311 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateBlogPostings took 0 ms
+2025-12-08 11:05:14.312 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateAssetLinkEntries took 0 ms
+2025-12-08 11:05:14.313 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addPortletSettings took 0 ms
+2025-12-08 11:05:14.315 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateSXPBlueprint took 0 ms
+2025-12-08 11:05:14.340 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking updateLayoutSets took 25 ms
+2025-12-08 11:05:14.341 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addAccountsOrganizations took 0 ms
+2025-12-08 11:05:14.342 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addUserAccounts took 1 ms
+2025-12-08 11:05:14.343 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateSegmentsEntries took 0 ms
+2025-12-08 11:05:14.344 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addUserRoles took 0 ms
+2025-12-08 11:05:14.344 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addRolesAssignments took 0 ms
+2025-12-08 11:05:14.352 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addObjectDefinitions took 6 ms
+2025-12-08 11:05:14.353 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateObjectRelationships took 0 ms
+2025-12-08 11:05:14.355 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateObjectFields took 0 ms
+2025-12-08 11:05:14.356 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking publishObjectDefinitions took 0 ms
+2025-12-08 11:05:14.357 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateNotificationTemplates took 0 ms
+2025-12-08 11:05:14.478 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateDDMTemplates took 121 ms
+2025-12-08 11:05:14.479 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addAssetListEntries took 0 ms
+2025-12-08 11:05:14.482 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateJournalArticles took 1 ms
+2025-12-08 11:05:14.483 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateAccountEntryRestrictions took 0 ms
+2025-12-08 11:05:14.485 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateObjectActions took 0 ms
+2025-12-08 11:05:14.486 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateObjectEntries took 0 ms
+2025-12-08 11:05:14.487 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addCPDefinitions took 0 ms
+2025-12-08 11:05:36.146 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addLayoutUtilityPageEntries took 21658 ms
+2025-12-08 11:05:36.147 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addLayoutPageTemplates took 0 ms
+2025-12-08 11:05:40.362 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateLayoutsContent took 4214 ms
+2025-12-08 11:05:40.364 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addExpandoValues took 0 ms
+2025-12-08 11:05:40.365 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addSegmentsExperiences took 0 ms
+2025-12-08 11:05:40.366 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:5613] Invoking addOrUpdateResourcePermissions took 0 ms
+2025-12-08 11:05:40.368 INFO  [http-nio-8080-exec-2][BundleSiteInitializer:545] Initialized com.liferay.site.initializer.welcome for group 20117 in 43852 ms
+2025-12-08 11:10:00.066 WARN  [liferay/mail-3][MailMessageListener:123] Email test@domain.invalid will be ignored because it is included in mail.send.blacklist
+2025-12-08 11:10:00.066 WARN  [liferay/mail-3][MailMessageListener:49] Skipping email because the sender is not specified
+2025-12-08 11:36:44.298 INFO  [http-nio-8080-exec-5][ObjectDefinitionResourceImpl:121] Deleting object definition 33151
+2025-12-08 11:36:44.766 INFO  [http-nio-8080-exec-5][ObjectDefinitionResourceImpl:144] Deleted object definition 33151 in 468ms

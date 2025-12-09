@@ -1,3 +1,0 @@
-# meetup-demo
-
-Meetup Demo

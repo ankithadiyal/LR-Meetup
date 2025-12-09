@@ -1,0 +1,13 @@
+assemble:
+    - from: vite-build
+      into: static
+krypton-service-master-cx:
+    friendlyURLMapping: krypton-service-master-cx
+    htmlElementName: krypton-service-master-cx
+    instanceable: false
+    name: Krypton Service Master
+    portletCategoryName: category.client-extensions
+    type: customElement
+    urls:
+        - assets/*.js
+    useESM: true

@@ -1,6 +1,8 @@
 package com.meetup.common.rest.internal.resource.v1_0_0;
 
+import com.liferay.portal.configuration.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.json.JSONArray;
+
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
@@ -20,7 +22,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
+
 
 /**
  * @author Varun.Agrawal
@@ -35,6 +39,10 @@ public class ServiceResourceImpl extends BaseServiceResourceImpl {
 	  @Context
 		private HttpServletRequest httpServletRequest;
 		
+	  @Reference
+      private ConfigurationProvider configurationProvider ;
+	  
+	  
 	  
 	  @Override
 		public Response createServices(com.meetup.common.rest.dto.v1_0_0.Service service) throws Exception {
@@ -63,6 +71,7 @@ public class ServiceResourceImpl extends BaseServiceResourceImpl {
 	      String portalUrl = PortalUtil.getPortalURL(contextHttpServletRequest);
 	      log.info("Portal URL: " + portalUrl);
 
+	      CommonRestUtil.initialize(configurationProvider);
 	      String accessToken = CommonRestUtil.getToken(portalUrl);
 	      if (accessToken == null) {
 	          throw new RuntimeException("Unable to fetch OAuth2 access token");

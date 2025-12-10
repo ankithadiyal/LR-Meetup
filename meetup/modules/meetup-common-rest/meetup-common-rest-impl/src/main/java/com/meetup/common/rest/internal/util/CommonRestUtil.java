@@ -1,6 +1,7 @@
 package com.meetup.common.rest.internal.util;
 
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.configuration.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -12,6 +13,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpComponentsUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.meetup.common.rest.config.OAuth2Configuration;
 import com.meetup.common.rest.internal.dtos.APICallResponse;
 import com.meetup.common.rest.internal.dtos.APIClientFactory;
 
@@ -40,22 +42,31 @@ public class CommonRestUtil {
  
 
 	private static final HttpClient HTTP_CLIENT = HttpClient.newHttpClient();
+    private static ConfigurationProvider configurationProvider ;
+	 public static void initialize(
+		      ConfigurationProvider meetUpconfigurationProvider) {
+		 
+		 configurationProvider = meetUpconfigurationProvider;
+	 }
+	    
 
 	public static String getToken(String url) {
 		try {
-			String clientId = "id-1e5e56cd-2181-e97d-244f-75954d63a4d";
-			String clientSecret = "secret-a4c34d85-7392-12ad-afc9-db4a4cb555b";
+//			String clientId = "id-1e5e56cd-2181-e97d-244f-75954d63a4d";
+//			String clientSecret = "secret-a4c34d85-7392-12ad-afc9-db4a4cb555b";
 
 			String tokenUrl = url + "/o/oauth2/token";
+			OAuth2Configuration oAuth2Configuration = configurationProvider.getSystemConfiguration(OAuth2Configuration.class);
+		 
 
-			Map<String, String> params = Map.of("client_id", clientId, "client_secret", clientSecret, "grant_type",
+			Map<String, String> params = Map.of("client_id", oAuth2Configuration.getClientId(), "client_secret", oAuth2Configuration.getClientSecret(), "grant_type",
 					"client_credentials");
 
 			String requestBody = params.entrySet().stream()
 					.map(e -> URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8) + "="
 							+ URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8))
 					.collect(Collectors.joining("&"));
-
+			log.info("requestBody: " + requestBody);
 			HttpClient client = HttpClient.newHttpClient();
 
 			HttpRequest request = HttpRequest.newBuilder().uri(URI.create(tokenUrl))
@@ -65,6 +76,7 @@ public class CommonRestUtil {
 			HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
 			JSONObject responseJson = JSONFactoryUtil.createJSONObject(response.body());
+			log.info("responseJson: " + responseJson);
 
 			return responseJson.getString("access_token");
 		} catch (Exception e) {
@@ -72,6 +84,8 @@ public class CommonRestUtil {
 			return null;
 		}
 	}
+	
+ 
 	 
 
 
@@ -219,10 +233,11 @@ public class CommonRestUtil {
 
 	public  static JSONObject getEntityList(String propsData, Integer userId, Integer siteId,
 			HttpServletRequest httpServletRequest) throws PortalException {
+		log.info("propsData: "+ propsData);
 		JSONObject responseJson = JSONFactoryUtil.createJSONObject();
 		try {
 			JSONObject propsDataObj = JSONFactoryUtil.createJSONObject(propsData);
-
+			log.info("propsDataObj: "+ propsDataObj);
 			String entityListApiResponse;
 			boolean isAuditLog;
 			boolean isImpersonation;
@@ -322,7 +337,7 @@ public class CommonRestUtil {
 		String accessToken = getToken(portalURL);
 		APICallResponse apiCallResponse;
 		String entityListApiResponse = StringPool.BLANK;
-
+		log.debug("accessToken: " + accessToken);
 		try {
 			apiCallResponse = callGetApi(apiURL, accessToken);
 			if (Validator.isNotNull(apiCallResponse)) {

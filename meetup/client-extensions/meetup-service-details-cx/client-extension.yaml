@@ -2,10 +2,10 @@ assemble:
     - from: vite-build
       into: static
 krypton-service-master-cx:
-    friendlyURLMapping: krypton-service-master-cx
-    htmlElementName: krypton-service-master-cx
+    friendlyURLMapping: meetup-service-details-cx
+    htmlElementName: meetup-service-details-cx
     instanceable: false
-    name: Krypton Service Master
+    name: Meetup Service Details
     portletCategoryName: category.client-extensions
     type: customElement
     urls:

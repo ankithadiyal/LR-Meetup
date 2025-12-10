@@ -1,0 +1,13 @@
+assemble:
+    - from: vite-build
+      into: static
+meetup-service-master-cx:
+    friendlyURLMapping: meetup-service-master-cx
+    htmlElementName: meetup-service-master-cx
+    instanceable: false
+    name: Meetup Service Master
+    portletCategoryName: category.client-extensions
+    type: customElement
+    urls:
+        - assets/*.js
+    useESM: true

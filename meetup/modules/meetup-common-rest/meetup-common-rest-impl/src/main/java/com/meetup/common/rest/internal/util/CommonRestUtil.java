@@ -52,8 +52,6 @@ public class CommonRestUtil {
 
 	public static String getToken(String url) {
 		try {
-//			String clientId = "id-1e5e56cd-2181-e97d-244f-75954d63a4d";
-//			String clientSecret = "secret-a4c34d85-7392-12ad-afc9-db4a4cb555b";
 
 			String tokenUrl = url + "/o/oauth2/token";
 			OAuth2Configuration oAuth2Configuration = configurationProvider.getSystemConfiguration(OAuth2Configuration.class);

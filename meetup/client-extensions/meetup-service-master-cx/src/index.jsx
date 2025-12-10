@@ -17,7 +17,7 @@ class WebComponent extends HTMLElement {
   }
 }
 
-const ELEMENT_ID = "krypton-service-master-cx";
+const ELEMENT_ID = "meetup-service-master-cx";
 
 if (!customElements.get(ELEMENT_ID)) {
   customElements.define(ELEMENT_ID, WebComponent);

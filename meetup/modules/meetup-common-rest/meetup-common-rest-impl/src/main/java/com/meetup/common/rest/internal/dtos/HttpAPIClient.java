@@ -11,6 +11,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.meetup.common.rest.internal.util.MeetUpConstants;
 import com.meetup.common.rest.internal.util.MultiPartAPIUtil;
@@ -42,7 +43,6 @@ public class HttpAPIClient implements APIClient {
 	 * @param clientId the client id
 	 * @param clientSecret the client secret
 	 * @return the access token
-	 * @throws SystemException the krypton system exception
 	 */
 	@Override
 	public APICallResponse getAccessToken(String tokenURL, String clientId, String clientSecret) throws SystemException {
@@ -153,10 +153,12 @@ public class HttpAPIClient implements APIClient {
 		APICallResponse returnResponse = new APICallResponse();
 		
 		try {
-			
+			_log.info("url: " + url);
+			_log.info("accessToken: " + accessToken);
+
 			options.setPost(false);
 			options.addHeader(MeetUpConstants.ACCEPT, ContentTypes.APPLICATION_JSON);
-			options.addHeader(MeetUpConstants.AUTHORIZATION, MeetUpConstants.BEARER + StringPool.SPACE + accessToken);
+			options.addHeader(MeetUpConstants.AUTHORIZATION, MeetUpConstants.BEARER + accessToken);
 			options.setLocation(url);
 			
 			populateHttpResponse(options, returnResponse);
@@ -393,62 +395,15 @@ public class HttpAPIClient implements APIClient {
 	
 	private void populateHttpResponse(Http.Options options, APICallResponse returnResponse) throws IOException {
 
-		HttpClient client = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.NORMAL)
-				.connectTimeout(Duration.ofSeconds(30)).build();
+		String responseData = HttpUtil.URLtoString(options);
+	    Http.Response httpResponse = options.getResponse();
 
-		// Build request
-		HttpRequest.Builder requestBuilder = HttpRequest.newBuilder().uri(URI.create(options.getLocation()))
-				.timeout(Duration.ofSeconds(60));
-
-		// Add headers from Http.Options (Map<String, String>)
-		Map<String, String> headers = options.getHeaders();
-		if (headers != null && !headers.isEmpty()) {
-			for (Map.Entry<String, String> entry : headers.entrySet()) {
-				String key = entry.getKey();
-				String value = entry.getValue();
-				if (value != null && !value.isEmpty()) {
-					requestBuilder.header(key, value);
-				}
-			}
-		}
-
-		String method = options.getMethod().toString();
-
-		if (Http.Method.POST.toString().equals(method) || Http.Method.PUT.toString().equals(method)
-				|| Http.Method.PATCH.toString().equals(method)) {
-
-			Http.Body bodyObj = options.getBody();
-			String body = "";
-			if (bodyObj != null && bodyObj.getContent() != null) {
-				body = bodyObj.getContent();
-			}
-			if (_log.isDebugEnabled()) {
-				_log.debug("Final request body: " + body);
-			}
-			requestBuilder.method(method, HttpRequest.BodyPublishers.ofString(body));
-
-		} else if (Http.Method.DELETE.toString().equals(method)) {
-			requestBuilder.DELETE();
-
-		} else {
-			requestBuilder.GET();
-		}
-
-		try {
-			HttpResponse<String> response = client.send(requestBuilder.build(), HttpResponse.BodyHandlers.ofString());
-			if (_log.isDebugEnabled()) {
-				_log.debug("response: " + response);
-			}
-			returnResponse.setResponseCode(response.statusCode());
-			returnResponse.setResponseContentLength(response.body() != null ? response.body().length() : 0);
-			returnResponse
-					.setResponseContentType(response.headers().firstValue("Content-Type").orElse("application/json"));
-			returnResponse.setResponseData(response.body());
-
-		} catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-			throw new IOException("Request interrupted", e);
-		}
+	    returnResponse.setResponseCode(httpResponse.getResponseCode());
+	    returnResponse.setResponseContentLength(httpResponse.getContentLength());
+	    returnResponse.setResponseContentType(httpResponse.getContentType());
+	    returnResponse.setResponseHeaders(httpResponse.getHeaders());
+	    returnResponse.setResponseRedirect(httpResponse.getRedirect());
+	    returnResponse.setResponseData(responseData);
 	}
 
 	

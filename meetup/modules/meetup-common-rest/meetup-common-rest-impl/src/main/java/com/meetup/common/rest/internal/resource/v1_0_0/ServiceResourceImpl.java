@@ -52,6 +52,7 @@ public class ServiceResourceImpl extends BaseServiceResourceImpl {
 		    JSONObject bundleJson = JSONFactoryUtil.createJSONObject(jsonString);
 		    String portalUrl = PortalUtil.getPortalURL(httpServletRequest);
 		    log.info("Portal URL: " + portalUrl);
+		    CommonRestUtil.initialize(configurationProvider);
 		    JSONObject resultJson = CommonRestUtil.createServiceBundleViaApi(portalUrl, bundleJson);
 		    log.info("result json " + resultJson);
 		    

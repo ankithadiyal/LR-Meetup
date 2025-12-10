@@ -1,0 +1,6 @@
+Bundle-Name: meetup-common-rest-api
+Bundle-SymbolicName: com.meetup.common.rest.api
+Bundle-Version: 1.0.0
+Export-Package: \
+	com.meetup.common.rest.dto.v1_0_0,\
+	com.meetup.common.rest.resource.v1_0_0

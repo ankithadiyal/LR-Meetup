@@ -1,0 +1,9 @@
+dependencies {
+	//api project(":modules:meetup-common-rest:meetup-common-rest-api")
+ compileOnly project(":modules:meetup-common-rest:meetup-common-rest-api")
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+	compileOnly group: "org.osgi", name: "org.osgi.service.jaxrs"
+	 
+}
+
+group = "com.meetup.common.rest"

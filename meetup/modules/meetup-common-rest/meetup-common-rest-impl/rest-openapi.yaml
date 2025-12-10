@@ -1,0 +1,319 @@
+openapi: 3.0.1
+info:
+  description: Custom API to manage Service along with related Tickets and Schedule Maintenances in a one CRUD operation.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: MeetupCommonRest
+  version: v1.0.0
+
+servers:
+  - url: /o/service-bundle/v1.0
+
+tags:
+  - name: ServiceBundle
+    description: Composite Service + Tickets + ScheduleMaintenances
+
+paths:
+  /service-details-by-serviceid:
+    get:
+      summary: Get service-details
+      operationId: getServiceDetailsByServiceId
+      tags:
+        - Service
+      parameters:
+        - name: serviceId
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Service Id for fetching service details
+      responses:
+        "200":
+          description: service details
+          content:
+            application/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+        "400":
+          description: Bad request due to missing parameters
+        "500":
+          description: Internal server error
+      security:
+        - OAuth2:
+            - Liferay.Dashboard.REST.everything.read
+  /create-services:
+    post:
+      summary: Create a createServices from underlying system.
+      description: This endpoint handles the create/update createServices.
+      operationId: createServices
+      tags:
+        - Service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Service"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/Service"
+      responses:
+        "200":
+          description: Create Services
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Response"
+        "201":
+          description: Services created successfully.
+        "202":
+          description: Async
+        "400":
+          description: Data validation failed due to missing mandatory fields.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestErrorResponse"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/BadRequestErrorResponse"
+        "401":
+          description: Authentication failed. Invalid API credentials.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedErrorResponse"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedErrorResponse"
+        "500":
+          description: Unable to create scheduled maintenances. Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerErrorResponse"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/InternalServerErrorResponse"
+      security:
+        - OAuth2:
+            - Liferay.Service.REST.everything.write
+  /entity-list-new:
+    get:
+      description: Get entity list New
+      tags: ["ServiceEntity"]
+      summary: Get Entity List New
+      operationId: getEntityListNew
+      parameters:
+        - name: propsData
+          in: query
+          required: true
+          schema:
+            type: string
+          description: "Props Data"
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: "User Id"
+        - name: siteId
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: "Site Id"
+      responses:
+        '200':
+          description: Successfully retrieved the data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+        '400':
+          description: "Invalid request parameters"
+        '500':
+          description: "Internal Server Error"
+      security:
+        - OAuth2:
+            - Liferay.Entity.REST.everything.read
+
+components:
+  schemas:
+    Service:
+      type: object
+      description: Liferay object Service
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Internal Service entry ID
+        serviceId:
+          type: string
+          description: Business Service ID
+        serviceStatus:
+          type: string
+        sourceLocation:
+          type: string
+        destinationLocation:
+          type: string
+        variantName:
+          type: string
+        serviceCategory:
+          type: string
+        interfaceType:
+          type: string
+        bandwidth:
+          type: string
+        paymentTerms:
+          type: string
+        billingFrequency:
+          type: string
+        description:
+          type: string
+        contractPeriod:
+          type: string
+        contractRenewal:
+          type: string
+        serviceType:
+          type: string
+        activationDate:
+          type: string
+          format: date
+        modificationDate:
+          type: string
+          format: date
+        tickets:
+            type: array
+            items:
+              $ref: '#/components/schemas/Ticket'
+        scheduleMaintenances:
+            type: array
+            items:
+              $ref: '#/components/schemas/ScheduleMaintenance'
+    Ticket:
+      type: object
+      description: Liferay object Ticket
+      properties:
+        id:
+          type: integer
+          format: int64
+        ticketID:
+          type: string
+        subject:
+          type: string
+        ticketStatus:
+          type: string
+        date:
+          type: string
+          format: date-time
+        description:
+          type: string
+        serviceId:
+          type: integer
+          format: int64
+          description: Related Service ID (relationship field r_ticketServiceId_c_serviceId)
+    ScheduleMaintenance:
+      type: object
+      description: Liferay object ScheduleMaintenance
+      properties:
+        id:
+          type: integer
+          format: int64
+        maintenanceID:
+          type: string
+        impactType:
+          type: string
+        description:
+          type: string
+        plannedMaintenanceStartTime:
+          type: string
+          format: date-time
+        plannedMaintenanceEndTime:
+          type: string
+          format: date-time
+        actualStartTime:
+          type: string
+          format: date-time
+        actualEndTime:
+          type: string
+          format: date-time
+        maintenanceStatus:
+          type: string
+        urgency:
+          type: string
+        serviceId:
+          type: integer
+          format: int64
+          description: Related Service ID (relationship field r_serviceId_c_serviceId)
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
+    Response:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Service added successfully.
+    InternalServerErrorResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 500
+        message:
+          type: string
+          example: Unable to add service. Please try again later.
+        data:
+          type: object
+    BadRequestErrorResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: Data validation failed. Missing mandatory fields for service records.
+        data:
+          type: object
+    UnauthorizedErrorResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 401
+        message:
+          type: string
+          example: Authentication failed. Please verify your API credentials.
+        data:
+          type: object

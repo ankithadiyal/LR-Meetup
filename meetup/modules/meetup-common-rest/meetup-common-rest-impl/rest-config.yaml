@@ -1,0 +1,9 @@
+apiDir: "../meetup-common-rest-api/src/main/java"
+apiPackagePath: "com.meetup.common.rest"
+application:
+    baseURI: "/meetup-common-rest"
+    className: "MeetupCommonRestApplication"
+    name: "MeetupCommonRest"
+author: "Varun.Agrawal"
+clientDir: "../meetup-common-rest-client/src/main/java"
+testDir: "../meetup-common-rest-test/src/testIntegration/java"

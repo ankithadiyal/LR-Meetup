@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { axiosPrivate } from "../../../meetup-service-details-cx/src/common/axios";
-
+import FilterSidebar from "./Filter";
+ 
 const ServicesList = ({ onServiceSelect }) => {
 
   const [serviceListConfig, setServiceListConfig] = useState({});
   const [serviceList, setServiceList] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [statusList, setStatusList] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedStatuses, setSelectedStatuses] = useState([]);
+
+ 
 
   useEffect(() => {
     Liferay.on("allPortletsReady", function () {
@@ -23,31 +32,115 @@ const ServicesList = ({ onServiceSelect }) => {
     });
   }, []);
 
+ const applyFilters = (clearAll = false) => {
+    if (clearAll) {
+        setSelectedCategory("");
+        setSelectedStatuses([]);
+    }
+    fetchServiceList(searchQuery, clearAll);
+};
 
   useEffect(() => {
-    if (!serviceListConfig.restBuilderApiURL) return;
+    if (
+      !serviceListConfig ||
+      !serviceListConfig.restBuilderApiURL ||
+      !serviceListConfig.propsData
+    ) {
+      return;
+    }
 
-    fetchServiceList();
+    fetchServiceList("");
   }, [serviceListConfig]);
 
-  const fetchServiceList = async () => {
+  const fetchServiceList = async (searchValue = "", clearAll = false) => {
     const restBuilderApiURL = serviceListConfig.restBuilderApiURL;
-
     const userId = Liferay.ThemeDisplay.getUserId();
     const siteId = Liferay.ThemeDisplay.getSiteGroupId();
 
-    const propsDataEnc = btoa(
-      JSON.stringify(serviceListConfig.propsData)
-    );
+    let updatedPropsData = { ...serviceListConfig.propsData };
 
+    if (searchValue) {
+      const formattedSearchValue = `'${searchValue}'`;
+      updatedPropsData.screenFilters =
+        serviceListConfig.propsData.screenFilters.map(filter => ({
+          ...filter,
+          fields: filter.fields.map(field => ({
+            ...field,
+            value: formattedSearchValue
+          }))
+        }));
+    } else {
+      delete updatedPropsData.screenFilters;
+    }
+
+    if (!clearAll) {
+      const filters = [];
+      if (selectedCategory) {
+        filters.push({
+          key: "serviceCategory",
+          value: `'${selectedCategory}'`,
+          operator: "eq"
+        });
+      }
+      if (selectedStatuses.length > 0) {
+        selectedStatuses.forEach(status => {
+          filters.push({
+            key: "serviceStatus",
+            value: `'${status}'`,
+            operator: "eq"
+          });
+        });
+      }
+
+      if (filters.length > 0) {
+        updatedPropsData.filters = [
+          {
+            logicalOperator: "and",
+            fields: filters
+          }
+        ];
+      } else {
+        delete updatedPropsData.filters;
+      }
+    } else {
+      delete updatedPropsData.filters;
+    }
+
+    const propsDataEnc = btoa(JSON.stringify(updatedPropsData));
     const constructedUrl = `${restBuilderApiURL}?propsData=${propsDataEnc}&userId=${userId}&siteId=${siteId}`;
 
     const response = await axiosPrivate.get(constructedUrl);
-
     setServiceList(response.data);
-    console.log("serviceList::", response.data)
+
+    if (!statusList.length) {
+      const uniqueStatuses = [
+        ...new Set(response.data?.items?.map(item => item.serviceStatus))
+      ];
+      setStatusList(uniqueStatuses);
+    }
+
+    if (!categoryList.length) {
+      const uniqueCategories = [
+        ...new Set(response.data?.items?.map(item => item.serviceCategory).filter(Boolean))
+      ];
+      setCategoryList(uniqueCategories);
+    }
   };
 
+  const toggleSidebar = () => {
+    console.log("Sidebar toggled");  
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  useEffect(() => {
+    if (searchQuery === undefined) return;
+
+    const delayDebounce = setTimeout(() => {
+      fetchServiceList(searchQuery);
+    }, 500); 
+
+    return () => clearTimeout(delayDebounce);
+  }, [searchQuery]);
 
 
   const handleServiceClick = (serviceId) => {
@@ -56,16 +149,46 @@ const ServicesList = ({ onServiceSelect }) => {
 
   return (
     
-    <div className="table-main-body">
+    
+    <div className="table-main-body mt-5">
+      
+      <div className="service-list-table-header table-header d-flex mt-5">
+        <span className="font-weight-bold">Services</span>
+      <div className="left-controls"></div>
+      <div className="right-controls">
        <div class="searchbar">
         <input
           type="text"
           id="searchBox"
           placeholder="Search here..."
           value={searchQuery}
-          onChange={(e) => onSearch(e)}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
+
+      <div className="action-controls">
+        <div className="filterIcon">
+          <span className="material-symbols-outlined constl-icon" onClick={toggleSidebar}>
+            filter_alt
+          </span>
+        </div>
+      </div>
+      </div>
+       
+
+      </div>
+      <FilterSidebar
+        sidebarOpen={sidebarOpen}
+        toggleSidebar={toggleSidebar}
+        categoryList={categoryList}
+        statusList={statusList}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+        selectedStatuses={selectedStatuses}
+        setSelectedStatuses={setSelectedStatuses}
+        applyFilters={applyFilters}
+      />
+
       <div className="table-container">
         <table
           id="example"

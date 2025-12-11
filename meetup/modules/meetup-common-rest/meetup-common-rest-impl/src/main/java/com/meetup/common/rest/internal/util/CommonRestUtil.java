@@ -330,7 +330,7 @@ public class CommonRestUtil {
 
 		log.debug("============================ START ==========================================");
 
-		log.debug("EntityResponse -> apiCallResponse -> URL : " + apiURL);
+		log.info("EntityResponse -> apiCallResponse -> URL : " + apiURL);
 
 		String accessToken = getToken(portalURL);
 		APICallResponse apiCallResponse;
@@ -392,8 +392,10 @@ public class CommonRestUtil {
 		String aggregationTerms = getOptionalString(propsDataObj, MeetUpConstants.AGGREGRATION_TERMS);
 		String restrictedFields = getOptionalString(propsDataObj, MeetUpConstants.RESTRICTED_FIELDS);
 		String flatten = getOptionalString(propsDataObj, MeetUpConstants.FLATTEN);
+		log.info("propsData::"+propsDataObj);
 
 		JSONArray screenFilters = getOptionalJSONArray(propsDataObj, MeetUpConstants.SCREEN_FILTERS);
+		log.info("screenFilters::"+screenFilters);
 		JSONArray sortFields = getOptionalJSONArray(propsDataObj, MeetUpConstants.SORT);
 		int page = getOptionalInt(propsDataObj, MeetUpConstants.PAGE);
 		int pageSize = getOptionalInt(propsDataObj, MeetUpConstants.PAGE_SIZE);
@@ -463,10 +465,12 @@ public class CommonRestUtil {
 		if (filtersObj instanceof JSONObject jsonObject) {
 			return getAllFilters(jsonObject, screenFilters, screenFiltersLogicalOperatorObj);
 		} else if (filtersObj instanceof JSONArray jsonArray) {
+			log.info("inside else if >>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 			return getAllFilters(jsonArray, screenFilters, filtersLogicalOperatorObj, screenFiltersLogicalOperatorObj);
+		} else {
+			return getAllFilters(JSONFactoryUtil.createJSONObject(), screenFilters, screenFiltersLogicalOperatorObj);
 		}
-		return StringPool.BLANK;
-	}
+    }
 
 	public static String getAllFilters(JSONObject filters, JSONArray screenFilters, Object screenFiltersLogicalOperatorObj) {
 
